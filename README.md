@@ -112,6 +112,21 @@ If you want to turn off all features, you can specify an empty array in YAML lik
 Features: []
 ```
 
+You can also add extra line height to generated fonts. This example matches
+Neovim's `linespace=1` at 13pt and 96 logical DPI:
+
+```yaml
+Line Height:
+  Extra Pixels: 1
+  Font Size: 13
+  DPI: 96
+```
+
+The build converts the requested pixel gap to font units and writes it to the
+`hhea` and `OS/2` line-gap metrics after generating each TTF. It does not modify
+the base variable font. Because font metrics scale, change `Font Size` if your
+intended terminal size changes substantially.
+
 #### 2. Build the fonts!
 
 Build the fonts by running the main Python script in the project:

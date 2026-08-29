@@ -22,6 +22,7 @@ from fontTools.varLib.instancer import OverlapMode
 from opentype_feature_freezer import cli as pyftfeatfreeze
 from dlig2calt import dlig2calt
 from mergePowerlineFont import mergePowerlineFont
+from adjust_line_height import adjust_line_height
 from ttfautohint.options import USER_OPTIONS as ttfautohint_options
 
 # prevents over-active warning logs
@@ -237,6 +238,21 @@ def splitFont(
                                     )
 
         ttfautohint.ttfautohint()
+
+        # Add optional line gap after all other font processing. The source
+        # variable font remains untouched; only this generated instance changes.
+        lineHeight = fontOptions.get("Line Height")
+        if lineHeight:
+            extraUnits = adjust_line_height(
+                outputPath,
+                extra_pixels=lineHeight["Extra Pixels"],
+                font_size=lineHeight["Font Size"],
+                dpi=lineHeight.get("DPI", 96),
+            )
+            print(
+                f"\n→ Added {extraUnits} font units of line gap "
+                f"({lineHeight['Extra Pixels']}px at {lineHeight['Font Size']}pt)"
+            )
 
         print(f"\n→ Font saved to '{outputPath}'\n")
 

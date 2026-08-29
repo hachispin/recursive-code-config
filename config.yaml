@@ -23,6 +23,18 @@
 Family Name: Rain
 
 # -----------------------------------------------------------------------------
+# Line Height
+
+# Add the equivalent of Neovim `linespace=1` to generated fonts. Fonts store
+# spacing in scalable units, so Font Size and DPI describe where it should equal
+# exactly one pixel. This changes generated TTFs only, not the base variable font.
+
+Line Height:
+  Extra Pixels: 1
+  Font Size: 13
+  DPI: 96
+
+# -----------------------------------------------------------------------------
 # Font Styles
 
 # The variable axis values for the Regular, Italic, Bold, & Bold Italic fonts.
